@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AbuThar Hatem | Full Stack Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;600;700&family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:      #0d1117;
+      --bg2:     #161b22;
+      --bg3:     #1c2333;
+      --accent:  #388bfd;
+      --glow:    rgba(56,139,253,0.13);
+      --green:   #3fb950;
+      --purple:  #bc8cff;
+      --orange:  #ffa657;
+      --red:     #f85149;
+      --text:    #e6edf3;
+      --muted:   #8b949e;
+      --border:  #30363d;
+      --r:       12px;
+      --fen:     'Inter', sans-serif;
+      --far:     'Tajawal', sans-serif;
+      --fcode:   'Fira Code', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--far); line-height: 1.7; }
+    body.en { font-family: var(--fen); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 200; height: 62px; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(13,17,23,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo { font-family: var(--fcode); font-size: .93rem; font-weight: 600; color: var(--accent); }
+    .logo .dot { color: var(--green); }
+    nav { display: flex; gap: 1.4rem; }
+    nav a { color: var(--muted); font-size: .84rem; font-weight: 600; transition: color .2s; }
+    nav a:hover { color: var(--text); text-decoration: none; }
+    #langbtn {
+      display: flex; align-items: center; gap: 7px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 999px; padding: 5px 15px;
+      cursor: pointer; font-size: .82rem; font-weight: 700; color: var(--text);
+      transition: border-color .2s, background .2s;
+    }
+    #langbtn:hover { border-color: var(--accent); background: var(--glow); }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 900px; margin: 0 auto; padding: 5rem 2rem 3rem;
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.1rem;
+    }
+    .av-wrap {
+      width: 120px; height: 120px; border-radius: 50%; padding: 3px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent), var(--green), var(--purple));
+      position: relative;
+    }
+    .av-wrap img {
+      width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+      border: 3px solid var(--bg);
+    }
+    .online { position: absolute; bottom: 8px; right: 8px; width: 14px; height: 14px;
+      border-radius: 50%; background: var(--green); border: 2px solid var(--bg); }
+    .hero-name { font-size: 2.5rem; font-weight: 700; letter-spacing: -1px; line-height: 1.15; }
+    .grad {
+      background: linear-gradient(90deg, var(--accent), var(--purple) 60%, var(--green));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub { color: var(--muted); font-size: .98rem; max-width: 540px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .pill {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 999px; padding: 4px 14px;
+      font-size: .78rem; font-weight: 700; font-family: var(--fcode); color: var(--muted);
+    }
+    .pill.a { border-color: var(--accent); color: var(--accent); }
+    .pill.g { border-color: var(--green);  color: var(--green); }
+    .pill.p { border-color: var(--purple); color: var(--purple); }
+    .ctas { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: .4rem; }
+    .btn {
+      padding: 9px 22px; border-radius: 8px; font-size: .87rem; font-weight: 700;
+      cursor: pointer; transition: transform .15s, opacity .15s;
+      border: none; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn:hover { transform: translateY(-2px); opacity: .9; text-decoration: none; }
+    .btn-p { background: var(--accent); color: #fff; }
+    .btn-o { background: transparent; border: 1px solid var(--border); color: var(--text); }
+    .btn-o:hover { border-color: var(--accent); }
+
+    /* ── LAYOUT ── */
+    main { max-width: 900px; margin: 0 auto; padding: 0 2rem 5rem; }
+    section { margin-bottom: 3.5rem; }
+    .slabel {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--fcode); font-size: .72rem; font-weight: 700;
+      letter-spacing: 1.6px; text-transform: uppercase; color: var(--accent); margin-bottom: 1.3rem;
+    }
+    .slabel::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* ── ABOUT CARDS ── */
+    .about-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+    .about-card {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r);
+      padding: 1rem 1.1rem; display: flex; align-items: flex-start; gap: 10px;
+      transition: border-color .2s;
+    }
+    .about-card:hover { border-color: var(--accent); }
+    .about-card .ico { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+    .about-card .ac-title { font-size: .78rem; color: var(--muted); margin-bottom: 2px; }
+    .about-card .ac-val { font-size: .88rem; font-weight: 700; }
+
+    /* ── STATS ── */
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px,1fr)); gap: 11px; margin-bottom: 1.6rem; }
+    .stat {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r);
+      padding: 1rem; text-align: center; transition: border-color .2s;
+    }
+    .stat:hover { border-color: var(--accent); }
+    .stat .val { font-size: 1.5rem; font-weight: 700; color: var(--accent); font-family: var(--fcode); }
+    .stat .val.g { color: var(--green); }
+    .stat .val.p { color: var(--purple); }
+    .stat .val.o { color: var(--orange); }
+    .stat .lbl { font-size: .72rem; color: var(--muted); margin-top: 2px; }
+    .gh-cards { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .gh-cards img { border-radius: var(--r); max-width: 100%; }
+
+    /* ── SKILLS ── */
+    .skill-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 10px; }
+    .skill {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r);
+      padding: .9rem 1rem; display: flex; align-items: center; gap: 9px;
+      font-size: .85rem; font-weight: 600; transition: border-color .2s, transform .2s;
+    }
+    .skill:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    /* ── TABLE ── */
+    table { width: 100%; border-collapse: collapse; font-size: .86rem; }
+    th { text-align: start; padding: 9px 13px; color: var(--accent); border-bottom: 1px solid var(--border); font-family: var(--fcode); font-size: .75rem; }
+    td { padding: 10px 13px; border-bottom: 1px solid var(--border); color: var(--muted); }
+    tr:last-child td { border-bottom: none; }
+    td:first-child { color: var(--text); font-weight: 600; }
+    tr:hover td { background: var(--bg3); }
+
+    /* ── PROJECTS ── */
+    .proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 14px; }
+    .proj {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r);
+      padding: 1.2rem; display: flex; flex-direction: column; gap: 8px;
+      transition: border-color .2s, transform .2s;
+    }
+    .proj:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .proj-head { font-size: .95rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .proj-head a { color: var(--text); }
+    .proj-head a:hover { color: var(--accent); text-decoration: none; }
+    .proj p { color: var(--muted); font-size: .83rem; line-height: 1.6; flex: 1; }
+    .tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .tag { background: rgba(56,139,253,.10); color: var(--accent); border: 1px solid rgba(56,139,253,.28); border-radius: 4px; padding: 2px 8px; font-size: .71rem; font-family: var(--fcode); }
+    .tag.g { background: rgba(63,185,80,.10); color: var(--green); border-color: rgba(63,185,80,.3); }
+    .tag.p { background: rgba(188,140,255,.10); color: var(--purple); border-color: rgba(188,140,255,.3); }
+    .tag.o { background: rgba(255,166,87,.10); color: var(--orange); border-color: rgba(255,166,87,.3); }
+    .proj-meta { display: flex; gap: 10px; font-size: .73rem; color: var(--muted); font-family: var(--fcode); align-items: center; }
+    .ld { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .ld-cs { background: #178600; }
+    .ld-js { background: #f1e05a; }
+    .ld-fl { background: #54c5f8; }
+    .ld-cpp { background: #f34b7d; }
+    .star { color: var(--orange); }
+
+    /* ── LEARN ── */
+    .learn {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-left: 3px solid var(--green); border-radius: var(--r);
+      padding: 1.2rem 1.5rem; font-family: var(--fcode); font-size: .83rem; line-height: 2.1; color: var(--muted);
+    }
+    [dir="rtl"] .learn { border-left: none; border-right: 3px solid var(--green); }
+    .learn .hi { color: var(--green); }
+
+    /* ── CONTACT ── */
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 11px; }
+    .cc {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r);
+      padding: .95rem 1.1rem; display: flex; align-items: center; gap: 11px;
+      font-size: .86rem; font-weight: 600; transition: border-color .2s, background .2s; color: var(--text);
+    }
+    .cc:hover { border-color: var(--accent); background: var(--glow); text-decoration: none; }
+    .cc .ico { font-size: 1.35rem; flex-shrink: 0; }
+    .cc .inf { display: flex; flex-direction: column; overflow: hidden; }
+    .cc small { color: var(--muted); font-size: .73rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 2rem; }
+    .fi { max-width: 900px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
+    .flogo { font-family: var(--fcode); font-size: .92rem; color: var(--accent); font-weight: 700; }
+    .flinks { display: flex; gap: 1.4rem; }
+    .flinks a { color: var(--muted); font-size: .83rem; transition: color .2s; }
+    .flinks a:hover { color: var(--text); text-decoration: none; }
+    .fcopy { width: 100%; text-align: center; color: var(--muted); font-size: .78rem; margin-top: 1.2rem; border-top: 1px solid var(--border); padding-top: 1.2rem; }
+    .heart { color: var(--red); }
+
+    #topbtn {
+      position: fixed; bottom: 22px; right: 22px; width: 40px; height: 40px; border-radius: 50%;
+      background: var(--accent); color: #fff; border: none; font-size: 1rem; cursor: pointer;
+      display: none; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(56,139,253,.4); transition: transform .2s; z-index: 99;
+    }
+    #topbtn:hover { transform: scale(1.12); }
+
+    @media (max-width:620px) {
+      .hero-name { font-size: 2rem; }
+      nav a { display: none; }
+      .gh-cards img { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">&lt;AbuThar<span class="dot">.dev</span>/&gt;</div>
+  <nav>
+    <a href="#about"    data-ar="عني"        data-en="About">عني</a>
+    <a href="#stats"    data-ar="الإحصائيات" data-en="Stats">الإحصائيات</a>
+    <a href="#skills"   data-ar="المهارات"   data-en="Skills">المهارات</a>
+    <a href="#projects" data-ar="المشاريع"   data-en="Projects">المشاريع</a>
+    <a href="#contact"  data-ar="التواصل"    data-en="Contact">التواصل</a>
+  </nav>
+  <button id="langbtn" onclick="toggleLang()">
+    <span id="flag">🇺🇸</span><span id="llbl">EN</span>
+  </button>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="av-wrap">
+    <img src="https://avatars.githubusercontent.com/u/167923142?s=96&v=4" alt="AbuThar Hatem"
+         onerror="this.src='https://ui-avatars.com/api/?name=AT&size=120&background=388bfd&color=fff&bold=true'"/>
+    <div class="online"></div>
+  </div>
+
+  <h1 class="hero-name">
+    <span data-ar="أبو ذر حاتم" data-en="AbuThar Hatem">أبو ذر حاتم</span><br/>
+    <span class="grad">Full Stack Developer</span>
+  </h1>
+
+  <p class="hero-sub"
+     data-ar="أبني تطبيقات سطح المكتب والويب والأنظمة المتكاملة — بكود نظيف ومعمارية قابلة للتوسع"
+     data-en="Building desktop apps, web systems & integrated solutions — with clean code and scalable architecture.">
+    أبني تطبيقات سطح المكتب والويب والأنظمة المتكاملة — بكود نظيف ومعمارية قابلة للتوسع
+  </p>
+
+  <div class="pills">
+    <span class="pill a">🖥️ Desktop · WPF</span>
+    <span class="pill g">🌐 Web · ASP.NET</span>
+    <span class="pill p">📱 Flutter</span>
+    <span class="pill a" data-ar="🟢 متاح للعمل" data-en="🟢 Open to Work">🟢 متاح للعمل</span>
+    <span class="pill"   data-ar="🇮🇶 العراق"    data-en="🇮🇶 Iraq">🇮🇶 العراق</span>
+  </div>
+
+  <div class="ctas">
+    <a class="btn btn-p" href="#contact" data-ar="📬 تواصل معي" data-en="📬 Contact Me">📬 تواصل معي</a>
+    <a class="btn btn-o" href="https://github.com/AbuTharHatem95" target="_blank">🐙 GitHub</a>
+    <a class="btn btn-o" href="https://www.linkedin.com/in/abo-thar" target="_blank">💼 LinkedIn</a>
+  </div>
+</section>
+
+<main>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="slabel"><span data-ar="عني" data-en="About Me">عني</span></div>
+    <div class="about-grid">
+      <div class="about-card">
+        <span class="ico">👨‍💻</span>
+        <div>
+          <div class="ac-title" data-ar="الدور" data-en="Role">الدور</div>
+          <div class="ac-val">Full Stack Developer</div>
+        </div>
+      </div>
+      <div class="about-card">
+        <span class="ico">📍</span>
+        <div>
+          <div class="ac-title" data-ar="الموقع" data-en="Location">الموقع</div>
+          <div class="ac-val" data-ar="العراق 🇮🇶" data-en="Iraq 🇮🇶">العراق 🇮🇶</div>
+        </div>
+      </div>
+      <div class="about-card">
+        <span class="ico">🏢</span>
+        <div>
+          <div class="ac-title" data-ar="المنظمة" data-en="Organization">المنظمة</div>
+          <div class="ac-val">@Iraqi-programmers</div>
+        </div>
+      </div>
+      <div class="about-card">
+        <span class="ico">💡</span>
+        <div>
+          <div class="ac-title" data-ar="الفلسفة" data-en="Philosophy">الفلسفة</div>
+          <div class="ac-val" data-ar="الحياة رحلة تعلّم" data-en="Life is a learning journey">الحياة رحلة تعلّم</div>
+        </div>
+      </div>
+      <div class="about-card">
+        <span class="ico">🎓</span>
+        <div>
+          <div class="ac-title" data-ar="التعلّم" data-en="Learning">التعلّم</div>
+          <div class="ac-val">ProgrammingAdvices</div>
+        </div>
+      </div>
+      <div class="about-card">
+        <span class="ico">🟢</span>
+        <div>
+          <div class="ac-title" data-ar="الحالة" data-en="Status">الحالة</div>
+          <div class="ac-val" style="color:var(--green)" data-ar="متاح للعمل" data-en="Open to Work">متاح للعمل</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <div class="slabel"><span data-ar="إحصائيات GitHub" data-en="GitHub Stats">إحصائيات GitHub</span></div>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="val">17</div>
+        <div class="lbl" data-ar="ريبو إجمالي" data-en="Total Repos">ريبو إجمالي</div>
+      </div>
+      <div class="stat">
+        <div class="val">3</div>
+        <div class="lbl" data-ar="ريبو عام" data-en="Public Repos">ريبو عام</div>
+      </div>
+      <div class="stat">
+        <div class="val">14</div>
+        <div class="lbl" data-ar="ريبو خاص" data-en="Private Repos">ريبو خاص</div>
+      </div>
+      <div class="stat">
+        <div class="val g">3</div>
+        <div class="lbl" data-ar="متابعون" data-en="Followers">متابعون</div>
+      </div>
+      <div class="stat">
+        <div class="val p">12</div>
+        <div class="lbl" data-ar="يتابعهم" data-en="Following">يتابعهم</div>
+      </div>
+      <div class="stat">
+        <div class="val o">3⭐</div>
+        <div class="lbl" data-ar="نجوم مكتسبة" data-en="Stars Earned">نجوم مكتسبة</div>
+      </div>
+    </div>
+
+    <!-- Live cards from GitHub Stats API -->
+    <div class="gh-cards">
+      <img src="https://github-readme-stats.vercel.app/api?username=AbuTharHatem95&show_icons=true&count_private=true&include_all_commits=true&hide_border=true&bg_color=161b22&title_color=388bfd&icon_color=3fb950&text_color=e6edf3&ring_color=388bfd" alt="GitHub Stats" loading="lazy"/>
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=AbuTharHatem95&layout=compact&hide_border=true&bg_color=161b22&title_color=388bfd&text_color=e6edf3" alt="Top Languages" loading="lazy"/>
+    </div>
+    <div class="gh-cards" style="margin-top:12px">
+      <img src="https://github-readme-streak-stats.herokuapp.com?user=AbuTharHatem95&hide_border=true&background=161b22&ring=388bfd&fire=3fb950&currStreakLabel=388bfd&sideLabels=8b949e&dates=8b949e&stroke=30363d" alt="Streak" loading="lazy" style="max-width:500px;width:100%"/>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="slabel"><span data-ar="المهارات التقنية" data-en="Tech Stack">المهارات التقنية</span></div>
+    <div class="skill-grid">
+      <div class="skill">⚙️ C#</div>
+      <div class="skill">🟣 .NET Core</div>
+      <div class="skill">🪟 WPF</div>
+      <div class="skill">🔷 MVVM</div>
+      <div class="skill">🌐 ASP.NET Core</div>
+      <div class="skill">🔗 REST API</div>
+      <div class="skill">🗄️ SQL Server</div>
+      <div class="skill">🔌 ADO.NET</div>
+      <div class="skill">🔶 Entity Framework</div>
+      <div class="skill">📱 Flutter</div>
+      <div class="skill">⚡ JavaScript</div>
+      <div class="skill">🌿 Git & GitHub</div>
+      <div class="skill">🏗️ Clean Architecture</div>
+      <div class="skill">💉 Dependency Injection</div>
+      <div class="skill">🔄 Repository Pattern</div>
+      <div class="skill">🧪 SOLID Principles</div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section>
+    <div class="slabel"><span data-ar="ماذا أستطيع أن أفعل؟" data-en="What I Do">ماذا أستطيع أن أفعل؟</span></div>
+    <table>
+      <thead>
+        <tr>
+          <th data-ar="🔧 المجال"    data-en="🔧 Domain">🔧 المجال</th>
+          <th data-ar="📋 التفاصيل" data-en="📋 Details">📋 التفاصيل</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-ar="تطبيقات سطح المكتب" data-en="Desktop Apps">تطبيقات سطح المكتب</td>
+          <td data-ar="WPF + .NET Core + MVVM بواجهات احترافية وبنية نظيفة" data-en="WPF + .NET Core + MVVM with professional UIs and clean architecture">WPF + .NET Core + MVVM بواجهات احترافية وبنية نظيفة</td>
+        </tr>
+        <tr>
+          <td data-ar="تطوير الويب والـ APIs" data-en="Web & API Development">تطوير الويب والـ APIs</td>
+          <td data-ar="ASP.NET Core REST APIs مع SQL Server وEF Core" data-en="ASP.NET Core REST APIs with SQL Server and EF Core">ASP.NET Core REST APIs مع SQL Server وEF Core</td>
+        </tr>
+        <tr>
+          <td data-ar="تطبيقات الجوال" data-en="Mobile Apps">تطبيقات الجوال</td>
+          <td data-ar="تطبيقات Flutter متعددة المنصات" data-en="Cross-platform Flutter applications">تطبيقات Flutter متعددة المنصات</td>
+        </tr>
+        <tr>
+          <td data-ar="تصميم قواعد البيانات" data-en="Database Design">تصميم قواعد البيانات</td>
+          <td data-ar="مخططات علائقية متقدمة مع Stored Procedures وتحليل البيانات" data-en="Advanced relational schemas with stored procedures and data analysis">مخططات علائقية متقدمة مع Stored Procedures وتحليل البيانات</td>
+        </tr>
+        <tr>
+          <td data-ar="أدوات المطورين" data-en="Developer Tools">أدوات المطورين</td>
+          <td data-ar="بناء أدوات تحليل الأكواد وقواعد البيانات والأنظمة" data-en="Building code analysis, database tools and system utilities">بناء أدوات تحليل الأكواد وقواعد البيانات والأنظمة</td>
+        </tr>
+        <tr>
+          <td data-ar="البنية النظيفة" data-en="Clean Architecture">البنية النظيفة</td>
+          <td data-ar="SOLID · DRY · KISS · Repository · DI · MVVM" data-en="SOLID · DRY · KISS · Repository · DI · MVVM">SOLID · DRY · KISS · Repository · DI · MVVM</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="slabel"><span data-ar="المشاريع الحقيقية" data-en="Real Projects">المشاريع الحقيقية</span></div>
+    <div class="proj-grid">
+
+      <!-- WebCodeAnalyzer -->
+      <div class="proj">
+        <div class="proj-head">🔍 <a href="https://github.com/AbuTharHatem95/WebCodeAnalyzer_bak" target="_blank">WebCodeAnalyzer</a> ⭐</div>
+        <p data-ar="أداة متقدمة لتحليل أكواد الويب — تفحص البنية وتستخرج الأنماط وتساعد في فهم المشاريع البرمجية الكبيرة."
+           data-en="Advanced tool for analyzing web code — inspects structure, extracts patterns, and helps understand large codebases.">
+          أداة متقدمة لتحليل أكواد الويب — تفحص البنية وتستخرج الأنماط وتساعد في فهم المشاريع الكبيرة.
+        </p>
+        <div class="tags"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag g">⭐ 1 Star</span></div>
+        <div class="proj-meta"><span class="ld ld-cs"></span> C# &nbsp;·&nbsp; Private</div>
+      </div>
+
+      <!-- EliteCafe POS -->
+      <div class="proj">
+        <div class="proj-head">☕ <a href="https://github.com/AbuTharHatem95/EliteCafe-POS" target="_blank">EliteCafe POS</a></div>
+        <p data-ar="نظام نقاط بيع متكامل لإدارة المقاهي — الطلبات والفواتير والمخزون وواجهة مستخدم عصرية."
+           data-en="Full POS system for café management — orders, invoicing, inventory and a modern UI.">
+          نظام نقاط بيع متكامل لإدارة المقاهي — الطلبات والفواتير والمخزون وواجهة عصرية.
+        </p>
+        <div class="tags"><span class="tag o">JavaScript</span><span class="tag">POS</span></div>
+        <div class="proj-meta"><span class="ld ld-js"></span> JavaScript &nbsp;·&nbsp; Private</div>
+      </div>
+
+      <!-- Publisher -->
+      <div class="proj">
+        <div class="proj-head">📢 <a href="https://github.com/AbuTharHatem95/Publisher" target="_blank">Publisher</a></div>
+        <p data-ar="تطبيق نشر وإدارة المحتوى — يُنظّم عمليات النشر ويوفر واجهة نظيفة لإدارة المواد المنشورة."
+           data-en="Content publishing and management app — organizes publishing workflows with a clean management interface.">
+          تطبيق نشر وإدارة المحتوى — يُنظّم عمليات النشر ويوفر واجهة نظيفة للإدارة.
+        </p>
+        <div class="tags"><span class="tag">C#</span><span class="tag">.NET</span></div>
+        <div class="proj-meta"><span class="ld ld-cs"></span> C# &nbsp;·&nbsp; Private</div>
+      </div>
+
+      <!-- ProductSales -->
+      <div class="proj">
+        <div class="proj-head">📦 <a href="https://github.com/AbuTharHatem95/ProductSales" target="_blank">ProductSales</a></div>
+        <p data-ar="نظام إدارة مبيعات المنتجات — تتبع المبيعات والمخزون والعملاء مع تقارير تفصيلية."
+           data-en="Product sales management system — tracks sales, inventory and customers with detailed reports.">
+          نظام إدارة مبيعات المنتجات — تتبع المبيعات والمخزون والعملاء مع تقارير تفصيلية.
+        </p>
+        <div class="tags"><span class="tag">C#</span><span class="tag">SQL Server</span></div>
+        <div class="proj-meta"><span class="ld ld-cs"></span> C# &nbsp;·&nbsp; Private</div>
+      </div>
+
+      <!-- Hackathon -->
+      <div class="proj">
+        <div class="proj-head">🏆 <a href="https://github.com/AbuTharHatem95/Hackathon-Project" target="_blank">Hackathon Project</a> ⭐</div>
+        <p data-ar="مشروع هاكاثون — بُني في وقت محدود ويعكس القدرة على التفكير السريع وتنفيذ حلول كاملة تحت الضغط."
+           data-en="Hackathon project — built under time pressure, reflects rapid thinking and full solution delivery.">
+          مشروع هاكاثون — يعكس القدرة على التفكير السريع وتنفيذ حلول كاملة تحت الضغط.
+        </p>
+        <div class="tags"><span class="tag">C#</span><span class="tag g">🏆 Hackathon</span></div>
+        <div class="proj-meta"><span class="ld ld-cs"></span> C# &nbsp;·&nbsp; ⭐ 1 Star</div>
+      </div>
+
+      <!-- Bank System -->
+      <div class="proj">
+        <div class="proj-head">🏦 <a href="https://github.com/AbuTharHatem95/Bank-System-Managemnt" target="_blank">Bank System Management</a></div>
+        <p data-ar="نظام إدارة بنكي: فتح حسابات، تحويلات، إيداع وسحب، مصادقة مستخدمين، وسجل معاملات كامل."
+           data-en="Banking system: account management, transfers, deposits, withdrawals, authentication and transaction logs.">
+          نظام بنكي: حسابات، تحويلات، إيداع وسحب، مصادقة، وسجل معاملات كامل.
+        </p>
+        <div class="tags"><span class="tag">C#</span><span class="tag">SQL Server</span><span class="tag">WPF</span></div>
+        <div class="proj-meta"><span class="ld ld-cs"></span> C# &nbsp;·&nbsp; Private</div>
+      </div>
+
+      <!-- School Management -->
+      <div class="proj">
+        <div class="proj-head">🏫 <a href="https://github.com/AbuTharHatem95/SchoolManagment" target="_blank">School Management</a></div>
+        <p data-ar="نظام إدارة مدرسية — إدارة الطلاب والمعلمين والدرجات والجداول الدراسية."
+           data-en="School management system — managing students, teachers, grades and timetables.">
+          نظام إدارة مدرسية — طلاب، معلمون، درجات، وجداول دراسية.
+        </p>
+        <div class="tags"><span class="tag">C#</span><span class="tag">SQL Server</span></div>
+        <div class="proj-meta"><span class="ld ld-cs"></span> C# &nbsp;·&nbsp; Private</div>
+      </div>
+
+      <!-- Sample Shop Flutter -->
+      <div class="proj">
+        <div class="proj-head">🛒 <a href="https://github.com/AbuTharHatem95/Sample_Shope_App" target="_blank">Sample Shop App</a></div>
+        <p data-ar="تطبيق متجر إلكتروني مبني بـ Flutter — يعرض المنتجات وسلة التسوق وواجهة مستخدم متعددة المنصات."
+           data-en="E-commerce app built with Flutter — product display, shopping cart and cross-platform UI.">
+          تطبيق متجر إلكتروني بـ Flutter — منتجات، سلة تسوق، وواجهة متعددة المنصات.
+        </p>
+        <div class="tags"><span class="tag p">Flutter</span><span class="tag p">Dart</span></div>
+        <div class="proj-meta"><span class="ld ld-fl"></span> Flutter &nbsp;·&nbsp; Private</div>
+      </div>
+
+      <!-- My Libraries -->
+      <div class="proj">
+        <div class="proj-head">🎨 <a href="https://github.com/AbuTharHatem95/My_Libraryes" target="_blank">WPF Design Collection</a></div>
+        <p data-ar="مجموعة تصاميم WPF قابلة لإعادة الاستخدام — مكتبة شخصية من المكونات والأنماط البصرية الجاهزة."
+           data-en="Reusable WPF design collection — a personal library of ready-made UI components and visual patterns.">
+          مجموعة تصاميم WPF قابلة لإعادة الاستخدام — مكتبة شخصية من المكونات الجاهزة.
+        </p>
+        <div class="tags"><span class="tag">C#</span><span class="tag">WPF</span><span class="tag">UI Design</span></div>
+        <div class="proj-meta"><span class="ld ld-cs"></span> C# &nbsp;·&nbsp; Archived</div>
+      </div>
+
+      <!-- Project Analysis Tool -->
+      <div class="proj">
+        <div class="proj-head">🔍 <a href="https://github.com/Iraqi-programmers/Project-Analysis-Tool-with-DB" target="_blank">Project Analysis Tool + DB</a></div>
+        <p data-ar="أداة تحليل قواعد البيانات بثلاث طرق: اتصال مباشر، ملف .bak، أو مقارنة ملفين. مشروع مفتوح المصدر بـ @Iraqi-programmers."
+           data-en="DB analysis tool with 3 modes: direct connection, .bak file, or comparing two backups. Open source with @Iraqi-programmers.">
+          أداة تحليل DB بثلاث طرق: اتصال مباشر، ملف .bak، أو مقارنة ملفين. مفتوح المصدر.
+        </p>
+        <div class="tags"><span class="tag">C#</span><span class="tag">SQL Server</span><span class="tag g">@Iraqi-programmers</span><span class="tag g">Open Source</span></div>
+        <div class="proj-meta"><span class="ld ld-cs"></span> C# &nbsp;·&nbsp; Public</div>
+      </div>
+
+      <!-- Stock Price -->
+      <div class="proj">
+        <div class="proj-head">📈 <a href="https://github.com/AbuTharHatem95/Stock-Price" target="_blank">Stock Price Tracker</a></div>
+        <p data-ar="تطبيق تتبع أسعار الأسهم — يعرض البيانات ويحسب التغيرات السعرية بواجهة بسيطة."
+           data-en="Stock price tracking app — displays data and calculates price changes with a clean interface.">
+          تطبيق تتبع أسعار الأسهم — بيانات، تغيرات سعرية، وواجهة بسيطة.
+        </p>
+        <div class="tags"><span class="tag">C#</span></div>
+        <div class="proj-meta"><span class="ld ld-cs"></span> C# &nbsp;·&nbsp; Private</div>
+      </div>
+
+      <!-- Reminder -->
+      <div class="proj">
+        <div class="proj-head">⏰ <a href="https://github.com/AbuTharHatem95/Reminder-of-retirement-date" target="_blank">Retirement Date Reminder</a></div>
+        <p data-ar="تطبيق تذكير بتاريخ التقاعد — يحسب المدة المتبقية ويُرسل تنبيهات للمستخدم."
+           data-en="Retirement date reminder app — calculates time remaining and sends user notifications.">
+          تطبيق يحسب المدة المتبقية حتى تاريخ التقاعد ويُرسل تنبيهات.
+        </p>
+        <div class="tags"><span class="tag">C#</span></div>
+        <div class="proj-meta"><span class="ld ld-cs"></span> C# &nbsp;·&nbsp; Private</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LEARNING -->
+  <section>
+    <div class="slabel"><span data-ar="أتعلم حالياً" data-en="Currently Learning">أتعلم حالياً</span></div>
+    <div class="learn">
+      📌 ProgrammingAdvices School — <a href="https://programmingadvices.com" target="_blank">programmingadvices.com</a><br/>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="slabel"><span data-ar="تواصل معي" data-en="Contact Me">تواصل معي</span></div>
+    <div class="contact-grid">
+      <a class="cc" href="mailto:abotharhayem@gmail.com">
+        <span class="ico">📧</span>
+        <div class="inf">
+          <span data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</span>
+          <small>abotharhayem@gmail.com</small>
+        </div>
+      </a>
+      <a class="cc" href="https://www.linkedin.com/in/abo-thar" target="_blank">
+        <span class="ico">💼</span>
+        <div class="inf"><span>LinkedIn</span><small>/in/abo-thar</small></div>
+      </a>
+      <a class="cc" href="https://github.com/AbuTharHatem95" target="_blank">
+        <span class="ico">🐙</span>
+        <div class="inf"><span>GitHub</span><small>AbuTharHatem95</small></div>
+      </a>
+      <a class="cc" href="https://t.me/Abu_sanad_95" target="_blank">
+        <span class="ico">✈️</span>
+        <div class="inf"><span>Telegram</span><small>@Abu_sanad_95</small></div>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fi">
+    <div class="flogo">&lt;AbuThar.dev/&gt;</div>
+    <div class="flinks">
+      <a href="#about"    data-ar="عني"        data-en="About">عني</a>
+      <a href="#stats"    data-ar="الإحصائيات" data-en="Stats">الإحصائيات</a>
+      <a href="#skills"   data-ar="المهارات"   data-en="Skills">المهارات</a>
+      <a href="#projects" data-ar="المشاريع"   data-en="Projects">المشاريع</a>
+      <a href="#contact"  data-ar="التواصل"    data-en="Contact">التواصل</a>
+    </div>
+    <div class="fcopy">
+      <span data-ar="صُنع بـ" data-en="Made with">صُنع بـ</span>
+      <span class="heart">♥</span>
+      <span data-ar=" وكود نظيف · " data-en=" and clean code · "> وكود نظيف · </span>
+      <strong>AbuThar Hatem</strong> · © 2025 ·
+      <a href="https://github.com/AbuTharHatem95" target="_blank">@AbuTharHatem95</a>
+    </div>
+  </div>
+</footer>
+
+<button id="topbtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  let lang = localStorage.getItem('lang') || 'ar';
+
+  function applyLang(l) {
+    const ar = l === 'ar';
+    document.documentElement.lang = l;
+    document.documentElement.dir  = ar ? 'rtl' : 'ltr';
+    document.body.classList.toggle('en', !ar);
+    document.querySelectorAll('[data-ar]').forEach(el => {
+      const v = el.getAttribute(ar ? 'data-ar' : 'data-en');
+      if (v !== null) el.textContent = v;
+    });
+    document.getElementById('flag').textContent = ar ? '🇺🇸' : '🇸🇦';
+    document.getElementById('llbl').textContent = ar ? 'EN' : 'ع';
+    localStorage.setItem('lang', l);
+  }
+
+  function toggleLang() { lang = lang === 'ar' ? 'en' : 'ar'; applyLang(lang); }
+
+  const tb = document.getElementById('topbtn');
+  window.addEventListener('scroll', () => { tb.style.display = scrollY > 300 ? 'flex' : 'none'; });
+
+  applyLang(lang);
+</script>
+</body>
+</html>
