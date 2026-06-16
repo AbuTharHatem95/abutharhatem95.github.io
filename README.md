@@ -1,7 +1,7 @@
 <h1 align="center">
   👋 Hello, I'm AbuThar Hatem
   <br />
-  <img src="https://readme-typing-svg.herokuapp.com/?lines=Full+Stack+Developer+WPF;ASP.NET+Core+Backend+Dev;Performance+Testing+k6&center=true&width=600&height=45">
+  <img src="https://readme-typing-svg.herokuapp.com/?lines=Full+Stack+Developer;ASP.NET+Core+Backend;Performance+Testing+k6&center=true&width=600&height=45">
 </h1>
 
 <p align="center">
