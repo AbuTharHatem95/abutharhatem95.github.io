@@ -1,7 +1,7 @@
 <h1 align="center">
   👋 Hello, I'm AbuThar Hatem
   <br />
-  <img src="https://readme-typing-svg.herokuapp.com/?lines=Desktop+Developer;WPF+.NET+Core+Expert;Clean+Code+Lover&center=true&width=500&height=45">
+  <img src="https://readme-typing-svg.herokuapp.com/?lines=Full+Stack+Developer+WPF;ASP.NET+Core+Backend+Dev;Performance+Testing+k6&center=true&width=600&height=45">
 </h1>
 
 <p align="center">
@@ -10,22 +10,30 @@
 
 ---
 
-### 🧑‍💻 About Me
+###  About Me
 
-- 💼 I'm a **Desktop Application Developer**
-- ⚙️ Focused on **WPF**, **MVVM**, and **.NET Core** ,**C#**
-- 📊 I love building apps with modern UI/UX and strong logic
-- 🧪 Passionate about clean architecture and reusable code
--  🌱 I’m currently learning ... In programmingadvices School (programmingadvices.com)
+- 🔋 I'm an **Software Developer**
+- ⚙️ Focused on **ASP.NET Core Backend**, **WPF/Desktop**, and **System Architecture**
+- 📊 Passionate about building **SaaS Platforms** with high-performance logic
+- 🧪 Expert in **Load & Stress Testing** using Grafana k6
+- ☁️ Skilled in **Docker**, **CI/CD Pipelines**, and **SQL Server**
+- 🌱 I’m currently learning advanced cloud infrastructure and AI integration
 
 ---
 
 ### 🚀 Tech Stack
 
+**Backend & Web:**
+![ASP.NET Core](https://img.shields.io/badge/-ASP.NET%20Core-512BD4?style=flat-square&logo=dotnet&logoColor=white)
 ![C#](https://img.shields.io/badge/-C%23-239120?style=flat-square&logo=c-sharp&logoColor=white)
-![.NET Core](https://img.shields.io/badge/-.NET%20Core-512BD4?style=flat-square&logo=.net&logoColor=white)
-![WPF](https://img.shields.io/badge/-WPF-68217A?style=flat-square&logo=windows&logoColor=white)
 ![SQL Server](https://img.shields.io/badge/-SQL%20Server-CC2927?style=flat-square&logo=microsoft-sql-server&logoColor=white)
+
+**Desktop & Performance:**
+![WPF](https://img.shields.io/badge/-WPF-68217A?style=flat-square&logo=windows&logoColor=white)
+![k6](https://img.shields.io/badge/-Grafana%20k6-7D3E97?style=flat-square&logo=k6&logoColor=white)
+![Docker](https://img.shields.io/badge/-Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+
+**Tools:**
 ![Git](https://img.shields.io/badge/-Git-F05032?style=flat-square&logo=git&logoColor=white)
 ![Visual Studio](https://img.shields.io/badge/-Visual%20Studio-5C2D91?style=flat-square&logo=visual-studio&logoColor=white)
 
